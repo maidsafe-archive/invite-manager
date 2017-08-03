@@ -147,6 +147,9 @@ app.use('/assignInvite/:id', async (req, res) => {
 });
 
 app.use('/testnet/:name', (req, res) => {
+    if (appConfig.testnets.indexOf(req.params.name) === -1) {
+        return res.status(400).send('Invalid testnet');
+    }
     req.session.testnet = req.params.name;
     res.redirect('/generateInvite');
 });
@@ -157,9 +160,6 @@ app.use('/testnet', (req, res) => {
 
 app.use('/generateInvite', async (req, res) => {
     try {
-        if (!req.session.testnet) {
-            return res.redirect(`./chooser.html`);
-        }
         let user = req.session.passport.user;
         const isSuperAdmin = appConfig.superAdmins.indexOf(user.email) > -1;
         const isAdmin = await adminService.isAdmin(user.userName);

@@ -85,25 +85,25 @@ class InviteService {
                         if (list.indexOf(ip) === -1) {
                             list.push(ip);
                         }
-                        res();
-                        // const template = Object.assign({}, require(`${testnet}.config.json`));
-                        // template.whitelisted_client_ips = list;
-                        // if (oldIp) {
-                        //     const oldIpIndex = template.whitelisted_client_ips.indexOf(oldIp);
-                        //     if (oldIpIndex > -1) {
-                        //         template.whitelisted_client_ips.splice(oldIpIndex, 1);
-                        //     }
-                        // }
-                        // fs.writeFileSync(localFileName, new Buffer(JSON.stringify(template, null, 2)));
-                        // const proxyConfig = Object.assign({}, appConfig.scp);
-                        // proxyConfig.host = proxyIp;
-                        // proxyConfig.password = proxyCred.scpPassword;
-                        // console.log('SCP to', proxyIp);
-                        // scpClient.scp(localFileName, proxyConfig, (err) => {
-                        //     console.log('SCP completed', proxyIp);
-                        //     err ? rej(err) : res();
-                        // });
+                        const template = Object.assign({}, require(`../${testnet}.config.json`));
+                        template.whitelisted_client_ips = list;
+                        if (oldIp) {
+                            const oldIpIndex = template.whitelisted_client_ips.indexOf(oldIp);
+                            if (oldIpIndex > -1) {
+                                template.whitelisted_client_ips.splice(oldIpIndex, 1);
+                            }
+                        }
+                        fs.writeFileSync(localFileName, new Buffer(JSON.stringify(template, null, 2)));
+                        const proxyConfig = Object.assign({}, appConfig.scp);
+                        proxyConfig.host = proxyIp;
+                        proxyConfig.password = proxyCred.scpPassword;
+                        console.log('SCP to', proxyIp);
+                        scpClient.scp(localFileName, proxyConfig, (err) => {
+                            console.log('SCP completed', proxyIp);
+                            err ? rej(err) : res();
+                        });
                     } catch (e) {
+                        console.log(e);
                         rej(e);
                     }
                 });
@@ -165,11 +165,13 @@ class InviteService {
                                 });
                         }
                     } catch (e) {
+                        console.log(e);
                         data.rej(e);
                         rej(e);
                     }
                 })
                 .catch((e) => {
+                    console.log(e);
                     data.rej(e);
                     rej(e);
                 });

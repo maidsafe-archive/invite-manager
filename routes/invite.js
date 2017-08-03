@@ -1,9 +1,9 @@
 import express from 'express';
 
 import { isSuperAdmin, getClientIp } from '../utils';
-import adminService from '../service/admin';
 import inviteService from '../service/invite';
 
+const appConfig = require('../configs/app');
 const router = express.Router();
 
 const isAdmin = (req) => {
@@ -108,6 +108,9 @@ router.post('/', async (req, res) => {
 
 // To set new IP
 router.post('/resetIp/:token/:testnet?', (req, res) => {
+    if (req.params.testnet && appConfig.testnets.indexOf(req.params.testnet) === -1) {
+        return res.status(400).send('Invalid testnet');
+    }
     const ip = getClientIp(req);
     const token = req.params.token;
     console.log(req.params.testnet || req.session.testnet, ip, token);

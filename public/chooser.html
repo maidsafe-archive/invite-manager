@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Choose Testnet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SAFE Network - Testnet Invite - Choose testnet</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
 </head>
 <body>
-    Testnet chooser page
+<div class="root">
+    <!-- Base vertical center aligned -->
+    <div class="base-vertical-center">
+        <div class="base-vertical-center-b">
+            <div class="base-vertical-center-cont">
+                <!-- Container card -->
+                <div class="container-card">
+                    <div class="container-card-b">
+                        <h3 class="title">Choose Testnet</h3>
+                        <div class="cntr">
+                            <div id="loading" class="loading">Please wait...</div>
+                            <!-- testnet list -->
+                            <div class="testnet-ls">
+                                <ul id="testnetList"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="application/javascript" src="scripts/axios.min.js"></script>
+<script type="application/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+<script type="application/javascript" src="scripts/main.js"></script>
 </body>
 </html>

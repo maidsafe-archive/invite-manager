@@ -8,6 +8,7 @@ var manageInviteClass = 'manage-invite';
 var inviteURLClass = 'invite-url';
 var adminClass = 'admin';
 var superAdminClass = 'super-admin';
+var TESTNET_SELECTION =  'TESTNET_SELECTION';
 
 var ROLES = {
   SUPER_ADMIN: 'superadmin',
@@ -15,8 +16,24 @@ var ROLES = {
   USER: 'user'
 };
 
+function storeTestnetSelection(val) {
+  window.localStorage.setItem(TESTNET_SELECTION, val);
+}
+
+function fetchTestnetSelection() {
+  return window.localStorage.getItem(TESTNET_SELECTION);
+}
+
 function post(url, data, headers) {
   return axios.post(BASE_URL + url, data, headers ? headers : {});
+}
+
+function setTestnetTitle() {
+  var title = fetchTestnetSelection();
+  if (!title) {
+    return;
+  }
+  $('#testnetTitle').html(title.replace('-', ' ').toUpperCase());
 }
 
 function get(url) {
@@ -340,6 +357,7 @@ function setInvite(invite, ip) {
 }
 
 function setUpdateIpPage() {
+  setTestnetTitle();
   setLoading(true);
   displayCntr(inviteCntrClass, false);
   displayCntr(ackInviteClass, false);
@@ -381,6 +399,7 @@ function setUpdateIpPage() {
 }
 
 function setAdminPage() {
+  setTestnetTitle();
   setLoading(true);
   displayCntr(inviteURLClass, false);
   displayCntr(adminClass, false);
@@ -398,6 +417,7 @@ function setAdminPage() {
 }
 
 function setSuperAdminPage() {
+  setTestnetTitle();
   setLoading(true);
   displayCntr(inviteURLClass, false);
   displayCntr(superAdminClass, false);
@@ -429,6 +449,7 @@ function setSuperAdminPage() {
 }
 
 function setAuthResponse() {
+  setTestnetTitle();
   var parsedURL = new URL(location.href);
   var info = parsedURL.searchParams.get('info');
   var err = parsedURL.searchParams.get('err');
@@ -524,6 +545,7 @@ function setInviteCount(invitesCount) {
 }
 
 function setStats() {
+  setTestnetTitle();
   setLoading(true);
   get('/invite/stats')
     .then(function (res) {
@@ -547,6 +569,33 @@ function setStats() {
     });
 }
 
+function selectTestnet(ele) {
+  var testnet = ele.dataset.name;
+  if (!testnet) {
+    return;
+  }
+  storeTestnetSelection(testnet);
+  goTo('/testnet/' + testnet);
+}
+
+function setTestnetList(list) {
+  var ele = $('#testnetList');
+  ele.html('');
+  for (var i=0; i< list.length; i++) {
+    ele.append('<li data-name="'+list[i]+'" onclick="selectTestnet(this)">'+list[i]+'</li>');
+  }
+}
+
+function setChooser() {
+  setLoading(true);
+  get('/testnet')
+    .then(function (res) {
+      console.log('res', res.data)
+      setTestnetList(res.data);
+      setLoading(false);
+    })
+}
+
 $(function () {
   var page = location.pathname.split('/').slice(-1).toString();
   switch (page) {
@@ -564,6 +613,9 @@ $(function () {
       break;
     case 'stats.html':
       setStats();
+      break;
+    case 'chooser.html':
+      setChooser();
       break;
     default:
       goTo('/404.html');

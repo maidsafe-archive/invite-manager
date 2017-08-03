@@ -776,3 +776,23 @@ table-view .table-view-b.proxy .head .head-i,
 .table-view .table-view-b.proxy .table-cntr .table-row .table-row-i {
   width: 100%;
 }
+
+.testnet-ls {
+  padding: 24px;
+}
+
+.testnet-ls ul {
+  list-style: none;
+}
+.testnet-ls ul li {
+  line-height: 30px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  background: #fefefe;
+  border: 1px solid #fefefe;
+  cursor: pointer;
+}
+
+.testnet-ls ul li:hover {
+  border-color: #ddd;
+}

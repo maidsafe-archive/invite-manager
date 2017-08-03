@@ -1,10 +1,10 @@
 {
 	"discourseUrl": "https://safenetforum.org",
 	"trustLevel": 1,
-	"mongo": "mongodb://localhost/invites_manager_new",
-	"authConfirmURL": "/generateInvite",
+	"mongo": "mongodb://localhost/invites_manager_copy",
+	"authConfirmURL": "/chooser.html",
 	"superAdmins": ["krishna.kumar@maidsafe.net"],
-	"testnets": ["Testnet-17", "Testnet-18"],
+	"testnets": ["TEST-17", "TEST-18"],
 	"authReturnUrl": {
 		"dev": "http://localhost:8000/auth/discourse/callback",
 		"prod": "https://invite.maidsafe.net/auth/discourse/callback"
