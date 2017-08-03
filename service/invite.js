@@ -18,9 +18,9 @@ class InviteService {
     constructor() {
         this.Invite = mongoose.model('invite', {
             token: {type: SchemaType.String, unique: true},
-            claimedBy: { type: SchemaType.ObjectId, ref: 'User' },
+            claimedBy: { type: SchemaType.ObjectId, ref: 'user' },
             assignedTo: SchemaType.String,
-            assignedBy: { type: SchemaType.ObjectId, ref: 'User' },
+            assignedBy: { type: SchemaType.ObjectId, ref: 'user' },
             used: {type: SchemaType.Boolean, index: true},
             testnet: SchemaType.String,
             ip: SchemaType.String,
@@ -112,7 +112,6 @@ class InviteService {
 
     _claimToken(data) {
         return new Promise((res, rej) => {
-            console.log(data);
             this.get(data.testnet, data.token)
                 .then(inviteToken => {
                     if (!inviteToken) {
@@ -148,7 +147,9 @@ class InviteService {
                             oldIpList.push(inviteToken.ip);
                         }
                         const previousIp = inviteToken.ip;
-                        inviteToken.claimedBy = inviteToken.claimedBy || data.user._id;
+                        if (!inviteToken.claimedBy && data.user) {
+                            inviteToken.claimedB = data.user._id;
+                        }
                         inviteToken.updatedOn = new Date;
                         inviteToken.ip = data.ip;
                         inviteToken.used = true;
@@ -246,6 +247,7 @@ class InviteService {
 
     claim(testnet, ip, token, user) {
         return new Promise((res, rej) => {
+            console.log('pushed');
             this.queue.push({testnet, ip, token, user, res, rej});
         });
     }

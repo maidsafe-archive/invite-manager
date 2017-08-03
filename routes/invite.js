@@ -70,6 +70,25 @@ router.get('/:token?', async (req, res) => {
     }
 });
 
+router.get('/:token/:testnet', async (req, res) => {
+    try {
+        let reqToken = req.params.token;
+        const invite = await inviteService.get(req.params.testnet, reqToken);
+        let role = 'user';
+        if (req.session && req.session.user && req.session.user.role) {
+            role = req.session.user.role;
+        }
+        res.send({
+            role,
+            cip: getClientIp(req),
+            ip: invite.ip
+        });
+    } catch(e) {
+        res.send(400, e);
+    }
+});
+
+
 router.post('/', async (req, res) => {
     try {
         if (!isSuperAdmin(req)) {
@@ -91,7 +110,7 @@ router.post('/', async (req, res) => {
 router.post('/resetIp/:token/:testnet?', (req, res) => {
     const ip = getClientIp(req);
     const token = req.params.token;
-
+    console.log(req.params.testnet || req.session.testnet, ip, token);
   inviteService.claim(req.params.testnet || req.session.testnet, ip, token)
         .then(() => res.send({invite: token, ip}))
         .catch(e => res.send(400, e.message));

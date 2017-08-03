@@ -57,12 +57,36 @@ function setLoading(state) {
   loadingEle.removeClass('show');
 }
 
+function getTestnetFromQuery() {
+    if (location.search) {
+        var param;
+        var tokens = location.search.replace('?', '').split('&');
+        for (let i = 0; i < tokens.length; i++) {
+            param = tokens[i].split('=');
+            if (param[0] === 'testnet') {
+                return param[1];
+            }
+        }
+    }
+    return;
+}
+
 function getInviteData(token) {
-  return get('/invite/' + token);
+    let url = '/invite/' + token;
+    let testnet = getTestnetFromQuery();
+    if (testnet) {
+        url += ('/' + testnet);
+    }
+  return get(url);
 }
 
 function resetIP(token) {
-  return post('/invite/resetIp/' + token, {
+  let url = '/invite/resetIp/' + token;
+  let testnet = getTestnetFromQuery();
+  if (testnet) {
+    url += ( '/' + testnet);
+  }
+  return post(url, {
     withCredentials: true
   });
 }
@@ -130,7 +154,7 @@ function onClickAssignUser(e) {
     .then(function (res) {
       setLoading(false);
       displayCntr(inviteURLClass, true);
-      var path = HOST + 'update_ip.html?invite=' + res.data.token;
+      var path = HOST + 'update_ip.html?invite=' + res.data.token + '&testnet=' + res.data.testnet;
       nameEle.val('');
       var linkEle = $('#userInviteLink');
       linkEle.attr('href', path);
