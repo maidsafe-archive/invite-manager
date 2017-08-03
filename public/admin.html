@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAFE Network - Testnet Invite - Admin</title>
+  <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+  <link rel="stylesheet" href="css/main.css" type="text/css" />
+</head>
+<body>
+<div class="root">
+  <!-- Base vertical center aligned -->
+  <div class="base-vertical-center">
+    <div class="base-vertical-center-b">
+      <div class="base-vertical-center-cont">
+        <!-- Container card -->
+        <div class="container-card">
+          <div class="container-card-b">
+            <h3 class="title">TEST 17</h3>
+            <div class="cntr">
+              <div id="loading" class="loading">Please wait...</div>
+              <!-- Admin -->
+              <div class="admin">
+                <div class="admin-b">
+                  <h4 class="title">Add new user</h4>
+                  <form name="add-user">
+                    <div class="user-input">
+                      <input id="userName" type="text" name="user-name" placeholder="Name" required="required" />
+                    </div>
+                    <!--<div class="user-input">-->
+                      <!--<input id="userEmail" type="email" name="user-email" placeholder="Email" required="required" />-->
+                    <!--</div>-->
+                    <div class="assign-btn">
+                      <button type="button" class="btn primary" onclick="onClickAssignUser(event)">Assign</button>
+                    </div>
+                  </form>
+                  <div class="invite-url">
+                    <span class="title">User can set IP from this URL</span>
+                    <!--<div id="userInviteLink">http://localhost:63342/invite_site/admin.html?_ijt=9nqh1smjuk847ejjdb03icm52m#</div>-->
+                    <a href="#" id="userInviteLink"></a>
+                    <button type="button" class="btn flat primary" onclick="onClickCloseInviteUrl()">x</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript" src="scripts/axios.min.js"></script>
+<script type="application/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+<script type="application/javascript" src="scripts/main.js"></script>
+</body>
+</html>

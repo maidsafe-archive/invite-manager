@@ -1,0 +1,275 @@
+// Auth choice component
+.auth-choice
+  .desc
+    padding 30px
+    text-align center
+    .p
+      font-size 14px
+      line-height 20px
+      color $common-text
+      padding 0
+      margin 0
+  &-b
+    margin-top 5px
+    padding-bottom 45px
+    box-sizing initial
+    clearfix()
+  &-i
+    width 33.33%
+    display inline-block
+    float left
+    text-align center
+    .name
+      display block
+      margin-top 16px
+      font-size 14px
+      font-weight normal
+      color $common-text
+      text-align center
+    a
+      width 110px
+      height 110px
+      display inline-block
+    .icn
+      display inline-block
+      width inherit
+      height inherit
+      background-repeat no-repeat
+      background-position center
+      background-size 65px
+      background-color $white
+      border-radius 50%
+      box-shadow 0 0 2px 0 rgba(0, 0, 0, 0.5), inset 0 1px 3px 0 rgba(0, 0, 0, 0.5)
+      &.github
+        background-image url($github-icon)
+      &.google
+        background-image url($google-icon)
+      &.twitter
+        background-image url($twitter-icon)
+
+.invite
+  &-b
+    padding 55px 24px
+    .has-invite
+      .label-1
+        font-size 14px
+        font-weight normal
+        color $common-text
+        line-height 30px
+        i
+          opacity 0.8
+      .update-btn
+        margin-top 24px
+      .invite-input
+        width 450px
+        margin 20px auto
+        padding 0
+        position relative
+        input[type=text]
+          width 100%
+          line-height 35px
+          border 0
+          outline none
+          font-size 14px
+          font-weight normal
+          color $common-text
+          padding-left 12px
+          padding-right 40px
+          border-radius 5px
+        button
+          width 35px
+          height 35px
+          position absolute
+          top 0
+          right 0
+          background-color $copy-btn-bg
+          border 0
+          border-radius 0 5px 5px 0
+          background-image url($copy-icon)
+          background-size 20px
+          background-position center
+          background-repeat no-repeat
+          outline none
+          cursor pointer
+    .ack-invite
+      .info-b
+        display block
+        font-size 14px
+        font-weight normal
+        color $common-text
+        margin-bottom 20px
+      .error-b
+        display none
+        .msg
+          display block
+          font-size 14px
+          font-weight normal
+          color $common-text
+          margin-bottom 20px
+      &.error
+        .error-b
+          display block
+        .info-b
+          display none
+
+.manage-invite
+  position absolute
+  top 0
+  right 0
+
+.admin
+  &-b
+    padding 24px 24px 84px
+    .title
+      font-size 14px
+      font-weight 600
+      color $common-text
+      line-height 30px
+      margin-bottom 20px
+    form
+      margin-bottom 28px
+      clearfix()
+    .user-input
+      width 50%
+      margin-bottom 20px
+      padding 0 16px
+      display inline-block
+      input
+        width 100%
+        line-height 35px
+        border 0
+        outline none
+        font-size 14px
+        font-weight normal
+        color $common-text
+        padding 0 12px
+        border-radius 5px
+    .assign-btn
+      width 100%
+      float left
+      margin-top 20px
+      button
+        min-width 120px
+    .invite-url
+      width 100%
+      padding 0 16px 8px
+      color #377aaf
+      background-color #edf7ff
+      font-size 14px
+      font-weight normal
+      text-align left
+      position absolute
+      bottom 0
+      left 0
+      .title
+        font-size: 12px;
+        font-weight: 600;
+      a
+        display block
+        line-height 30px
+        text-decoration none
+        color $pr-blue
+        &:hover
+          text-decoration underline
+      .btn
+        position absolute
+        top 0
+        right 0
+        font-size 11px
+        padding 8px
+        min-width auto
+
+.super-admin
+  &-b
+    padding 24px
+    .tab
+      &-nav
+        text-align left
+        border-bottom 1px solid #FFF
+        &-i
+          font-size 14px
+          color $common-text
+          display inline-block
+          padding 0 8px 3px
+          position relative
+          cursor: pointer;
+          text-align center
+          &.active:after
+            content ""
+            width 100%
+            height 2px
+            margin-bottom -1px
+            position absolute
+            bottom 0
+            left 0
+            background-color $pr-blue
+      &-cntr
+        &-i
+          display none
+          &:first-child
+            display block
+    .add-admin
+      form
+        margin-top 20px
+        .add-admin-inp
+          width 50%
+          margin 0 auto 20px
+          input
+            width 100%
+            line-height 35px
+            border 0
+            outline none
+            font-size 14px
+            font-weight normal
+            color $common-text
+            padding 0 12px
+            border-radius 5px
+        .add-admin-btn
+          margin-top 20px
+    .manage-cntr
+      padding-top 16px
+      clearfix()
+      &-i
+        width 50%
+        padding 8px
+        float left
+      &-ls
+        list-style none
+        text-align left
+        height 150px
+        overflow auto
+        li
+          width 100%
+          margin-bottom 8px
+          font-size 12px
+          &.used
+            text-decoration line-through
+      form
+        .manage-cntr-inp
+          height 150px
+          textarea
+            width 100%
+            height 100%
+            border 0
+            outline none
+            font-size 14px
+            font-weight normal
+            color $common-text
+            padding 8px 12px
+            border-radius 5px
+            resize none
+        .manage-cntr-btn
+          margin-top 20px
+      .manage-cntr-opt
+        margin-top 20px
+    .opts
+      width auto
+      padding 0 25px
+      position absolute
+      top 16px
+      right 0
+      .opt
+        display inline-block
+        button
+          font-size 10px
+          padding 8px 0

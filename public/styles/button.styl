@@ -1,0 +1,30 @@
+.btn
+  padding 8px 16px
+  background-color $default-btn-bg
+  color $default-btn-txt
+  border 0
+  min-width 120px
+  border-radius 5px
+  text-transform uppercase
+  font-size 14px
+  font-weight 600
+  outline none
+  cursor pointer
+  &:hover
+    background-color $default-btn-hover-bg
+  &:active
+    background-color $default-btn-active-bg
+  &.primary
+    background-color $pr-btn-bg
+    &:hover
+      background-color $pr-btn-hover-bg
+    &:active
+      background-color $pr-btn-active-bg
+  &.flat
+    background-color transparent !important
+    &.primary
+      color $pr-btn-bg
+      &:hover
+        color $pr-btn-hover-bg
+      &:active
+        color $pr-btn-active-bg

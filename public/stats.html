@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAFE Network - Testnet Invite - Update IP</title>
+  <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+  <link rel="stylesheet" href="css/main.css" type="text/css" />
+</head>
+<body>
+<div class="root">
+  <!-- Base vertical center aligned -->
+  <div class="base-vertical-center">
+    <div class="base-vertical-center-b">
+      <div class="base-vertical-center-cont">
+        <!-- Container card -->
+        <div class="container-card">
+          <div class="container-card-b">
+            <h3 class="title">TEST 17</h3>
+            <div class="cntr">
+              <div id="loading" class="loading">Please wait...</div>
+              <div class="stats">
+                <div class="stats-b">
+                  <!-- Invites count -->
+                  <div class="invite-counts">
+                    <div class="invite-counts-i">
+                      <div class="invite-counts-i-b">
+                        <span class="h">Available</span>
+                        <span id="availableInvites" class="v">0</span>
+                      </div>
+                    </div>
+                    <div class="invite-counts-grp">
+                      <h3 class="title">Consumed Invites</h3>
+                      <div class="invite-counts-i">
+                        <div class="invite-counts-i-b">
+                          <span class="h">Forum</span>
+                          <span id="consumedInviteCount" class="v">0</span>
+                        </div>
+                      </div>
+                      <div class="invite-counts-i">
+                        <div class="invite-counts-i-b">
+                          <span class="h">Manual</span>
+                          <span id="assignedInvites" class="v">0</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="invite-counts-grp">
+                      <h3 class="title">Invites without IP</h3>
+                      <div class="invite-counts-i">
+                        <div class="invite-counts-i-b">
+                          <span class="h">Forum</span>
+                          <span id="forumNotUsedInvite" class="v">0</span>
+                        </div>
+                      </div>
+                      <div class="invite-counts-i">
+                        <div class="invite-counts-i-b">
+                          <span class="h">Manual</span>
+                          <span id="assignedButNotUsedInvites" class="v">0</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Assigned table -->
+                  <div class="table-view">
+                    <div class="table-view-b invite-assigned">
+                      <h4 class="title">Manual Invites
+                        <span id="manualInvitesCount" class="count"></span>
+                        <span class="opt"><button type="button" class="btn primary" onclick="onClickToggleTableView(this)">show table</button></span>
+                      </h4>
+                      <div class="head">
+                        <div class="head-i">Invite</div>
+                        <div class="head-i">Assigned to</div>
+                        <div class="head-i">IP addr</div>
+                      </div>
+                      <div id="assignedInviteTable" class="table-cntr"></div>
+                    </div>
+                  </div>
+
+                  <!-- Used table -->
+                  <div class="table-view">
+                    <div class="table-view-b invite-used">
+                      <h4 class="title">Forum Invites
+                        <span id="forumInvitesCount" class="count"></span>
+                        <span class="opt"><button type="button" class="btn primary" onclick="onClickToggleTableView(this)">show table</button></span>
+                      </h4>
+                      <div class="head">
+                        <div class="head-i">Invite</div>
+                        <div class="head-i">IP addr</div>
+                      </div>
+                      <div id="usedInviteTable" class="table-cntr"></div>
+                    </div>
+                  </div>
+
+                  <div class="table-view">
+                    <div class="table-view-b proxy">
+                      <h4 class="title">Registered proxies
+                        <span id="proxiesCount" class="count"></span>
+                        <span class="opt"><button type="button" class="btn primary" onclick="onClickToggleTableView(this)">show table</button></span>
+                      </h4>
+                      <div class="head">
+                        <div class="head-i">IP addr</div>
+                      </div>
+                      <div id="proxyTable" class="table-cntr"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript" src="scripts/axios.min.js"></script>
+<script type="application/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+<script type="application/javascript" src="scripts/main.js"></script>
+</body>
+</html>

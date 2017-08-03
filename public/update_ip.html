@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAFE Network - Testnet Invite - Update IP</title>
+  <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+  <link rel="stylesheet" href="css/main.css" type="text/css" />
+</head>
+<body>
+<div class="root">
+  <!-- Base vertical center aligned -->
+  <div class="base-vertical-center">
+    <div class="base-vertical-center-b">
+      <div class="base-vertical-center-cont">
+        <!-- Container card -->
+        <div class="container-card">
+          <div class="container-card-b">
+            <h3 class="title">TEST 17</h3>
+            <div class="cntr">
+              <div id="loading" class="loading">Please wait...</div>
+              <!-- Invite -->
+              <div class="invite">
+                <div class="invite-b">
+                  <!-- has invite -->
+                  <div id="hasInvite" class="has-invite">
+                    <div class="ip-sec">
+                      <div class="ip-sec-i">
+                        <span class="name">Registered IP</span>
+                        <span class="val" id="inviteIP"></span>
+                      </div>
+                      <div class="ip-sec-i">
+                        <span class="name">Current IP</span>
+                        <span class="val" id="currentInviteIP"></span>
+                      </div>
+                    </div>
+                    <div class="update-btn">
+                      <button id="updateIp" class="btn primary" type="button" name="update-ip" onclick="onClickUpdateIP()">Update IP</button>
+                    </div>
+                    <span class="split"></span>
+                    <h4 class="label-1">Your invite token is</h4>
+                    <div class="invite-input">
+                      <input id="copyToken" type="text" name="invite-token" readonly="readonly" placeholder="No invite found"/>
+                      <button type="button" class="invite-token-copy" name="invite-token-copy" data-clipboard-target="#copyToken" title="copy"></button>
+                    </div>
+                    <h4 class="label-1">Please copy and paste the token into the Authenticator to create an account.</h4>
+                    <h4 class="label-1 warn">NOTE: Unless your Current IP matches the Registered IP, you may not be able to access the network.</h4>
+                  </div>
+                  <div class="ack-invite">
+                    <span id="ackInvite" class="info-b"></span>
+                    <div class="error-b">
+                      <span class="msg">Unable to process. Please Try again</span>
+                      <button class="btn primary" onclick="setUpdateIpPage()">Try Again</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- manage -->
+              <div class="manage-invite">
+                <button class="btn flat primary" onclick="onClickOpenStats()">Stats</button>
+                <button class="btn flat primary" onclick="onClickManage()">Manage</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript" src="scripts/clipboard.min.js"></script>
+<script type="application/javascript" src="scripts/axios.min.js"></script>
+<script type="application/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+<script type="application/javascript" src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAFE Network - Testnet Invite - Admin</title>
+  <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+  <link rel="stylesheet" href="css/main.css" type="text/css" />
+</head>
+<body>
+<div class="root">
+  <!-- Base vertical center aligned -->
+  <div class="base-vertical-center">
+    <div class="base-vertical-center-b">
+      <div class="base-vertical-center-cont">
+        <!-- Container card -->
+        <div class="container-card">
+          <div class="container-card-b">
+            <h3 class="title">TEST 17</h3>
+            <div class="cntr">
+              <div id="loading" class="loading">Please wait...</div>
+              <!-- super admin -->
+              <div class="super-admin">
+                <div class="super-admin-b">
+                  <div class="tab">
+                    <div class="tab-nav">
+                      <span class="tab-nav-i active" data-target="addAdmin">Add Admin</span>
+                      <span class="tab-nav-i" data-target="managerTokens">Manage Tokens</span>
+                      <span class="tab-nav-i" data-target="manageProxy">Manage Proxy</span>
+                    </div>
+                    <div class="tab-cntr">
+                      <div class="tab-cntr-i">
+                        <!-- add admin -->
+                        <div id="addAdmin" class="add-admin">
+                          <form name="add-admin">
+                            <div class="add-admin-inp">
+                              <input id="adminName" type="text" name="admin-name" placeholder="Admin name" required="required" />
+                            </div>
+                            <div class="add-admin-btn">
+                              <button type="button" class="btn primary" onclick="onClickAddAdmin()">Add admin</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="tab-cntr-i">
+                        <!-- manage tokens -->
+                        <div id="managerTokens" class="manage-cntr">
+                          <div class="manage-cntr-i">
+                            <ul id="tokensList" class="manage-cntr-ls"></ul>
+                            <div class="manage-cntr-opt">
+                              <button type="button" class="btn primary" onclick="onClickDeleteTokens()">Delete All</button>
+                            </div>
+                          </div>
+                          <div class="manage-cntr-i">
+                            <form name="add-tokens">
+                              <div class="manage-cntr-inp">
+                                <textarea id="tokensTextArea" name="tokens" placeholder="Enter tokens separated by new line character"></textarea>
+                              </div>
+                              <div class="manage-cntr-btn">
+                                <button type="button" class="btn primary" onclick="onClickAddTokens()">Add</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-cntr-i">
+                        <!-- manage proxy -->
+                        <div id="manageProxy" class="manage-cntr">
+                          <div class="manage-cntr-i">
+                            <ul id="proxiesList" class="manage-cntr-ls"></ul>
+                            <div class="manage-cntr-opt">
+                              <button type="button" class="btn primary" onclick="onClickDeleteProxies()">Delete All</button>
+                            </div>
+                          </div>
+                          <div class="manage-cntr-i">
+                            <form name="add-tokens">
+                              <div class="manage-cntr-inp">
+                                <textarea id="proxyTextArea" name="tokens" placeholder="Enter IPs separated by new line character"></textarea>
+                              </div>
+                              <div class="manage-cntr-btn">
+                                <button type="button" class="btn primary" onclick="onClickAddIPs()">Add</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="opts">
+                    <div class="opt">
+                      <button type="button" class="btn flat primary" onclick="onClickClearDb()">Clear Database</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="application/javascript" src="scripts/axios.min.js"></script>
+<script type="application/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+<script type="application/javascript" src="scripts/main.js"></script>
+</body>
+</html>
