@@ -482,7 +482,7 @@ function setAuthResponse() {
 }
 
 function trimInvite(invite) {
-  return invite.substr(0, 10) + '...' + invite.substr(-10);
+  return invite.substr(0, 4) + '...' + invite.substr(-4);
 }
 
 function setAssignedInviteTable(data) {
@@ -495,8 +495,9 @@ function setAssignedInviteTable(data) {
     $('#manualInvitesCount').html('('+ len +' Invite' + (len === 1 ? ')' : 's)'));
     for (var i=0; i < len; i++) {
       assignedInviteTable.append('<div class="table-row" title="'+data[i].token+'">' +
-        '<div class="table-row-i">'+ trimInvite(data[i].token) +'</div>'+
-        '<div class="table-row-i">'+ data[i].user +'</div>'+
+       '<div class="table-row-i">'+ trimInvite(data[i].token) +'</div>'+
+        '<div class="table-row-i">'+ data[i].assignedTo +'</div>'+
+          '<div class="table-row-i">'+ (data[i].assignedBy.userName || data[i].assignedBy.email) +'</div>'+
         '<div class="table-row-i">'+ (data[i].ip || 'not set') +'</div>'+
         '</div>');
     }
@@ -514,6 +515,7 @@ function setUsedInviteTable(data) {
     for (var i=0; i < len; i++) {
       usedInviteTable.append('<div class="table-row" title="'+data[i].token+'">' +
         '<div class="table-row-i">'+ trimInvite(data[i].token) +'</div>'+
+        '<div class="table-row-i">'+ (data[i].claimedBy.userName || data[i].claimedBy.email) +'</div>'+
         '<div class="table-row-i">'+ (data[i].ip || 'not set') +'</div>'+
         '</div>');
     }

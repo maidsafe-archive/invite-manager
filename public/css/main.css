@@ -747,10 +747,10 @@ body {
   display: block;
 }
 
-.table-view .table-view-b.invite-assigned .head .head-i:first-child,
-.table-view .table-view-b.invite-assigned .table-cntr .table-row .table-row-i:first-child {
-  width: 50%;
-}
+/*.table-view .table-view-b.invite-assigned .head .head-i:first-child,*/
+/*.table-view .table-view-b.invite-assigned .table-cntr .table-row .table-row-i:first-child {*/
+  /*width: 50%;*/
+/*}*/
 
 .table-view .table-view-b.invite-assigned .head .head-i,
 .table-view .table-view-b.invite-assigned .table-cntr .table-row .table-row-i{
