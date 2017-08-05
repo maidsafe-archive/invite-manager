@@ -762,10 +762,10 @@ body {
   overflow: auto;
 }
 
-.table-view .table-view-b.invite-used .head .head-i:first-child,
-.table-view .table-view-b.invite-used .table-cntr .table-row .table-row-i:first-child {
-  width: 75%;
-}
+/*.table-view .table-view-b.invite-used .head .head-i:first-child,*/
+/*.table-view .table-view-b.invite-used .table-cntr .table-row .table-row-i:first-child {*/
+  /*width: 75%;*/
+/*}*/
 
 .table-view .table-view-b.invite-used .head .head-i,
 .table-view .table-view-b.invite-used .table-cntr .table-row .table-row-i{
