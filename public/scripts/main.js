@@ -91,18 +91,22 @@ function getTestnetFromQuery() {
 function getInviteData(token) {
     let url = '/invite/' + token;
     let testnet = getTestnetFromQuery();
-    if (testnet) {
-        url += ('/' + testnet);
+    if (!testnet) {
+        alert('Testnet parameter is not found. The URL is invalid.');
+        return;
     }
+    url += ('/' + testnet);
   return get(url);
 }
 
 function resetIP(token) {
   let url = '/invite/resetIp/' + token;
   let testnet = getTestnetFromQuery();
-  if (testnet) {
-    url += ( '/' + testnet);
+  if (!testnet) {
+      alert('Testnet parameter is not found. The URL is invalid.');
+      return;
   }
+  url += ( '/' + testnet);
   return post(url, {
     withCredentials: true
   });

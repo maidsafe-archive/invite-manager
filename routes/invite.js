@@ -73,6 +73,9 @@ router.get('/:token?', async (req, res) => {
 router.get('/:token/:testnet', async (req, res) => {
     try {
         let reqToken = req.params.token;
+        if (appConfig.testnets.indexOf(req.params.testnet) === -1) {
+            return res.status(400).send('Invalid Testnet Name');
+        }
         const invite = await inviteService.get(req.params.testnet, reqToken);
         let role = 'user';
         if (req.session && req.session.user && req.session.user.role) {
@@ -108,13 +111,17 @@ router.post('/', async (req, res) => {
 
 // To set new IP
 router.post('/resetIp/:token/:testnet?', (req, res) => {
-    if (req.params.testnet && appConfig.testnets.indexOf(req.params.testnet) === -1) {
+    const testnet = req.params.testnet || req.session.testnet;
+    if (!testnet) {
+        res.status(400).send('Testnet param not found');
+    }
+    if (testnet && appConfig.testnets.indexOf(testnet) === -1) {
         return res.status(400).send('Invalid testnet');
     }
     const ip = getClientIp(req);
     const token = req.params.token;
-    console.log(req.params.testnet || req.session.testnet, ip, token);
-  inviteService.claim(req.params.testnet || req.session.testnet, ip, token)
+    // console.log(req.params.testnet || req.session.testnet, ip, token);
+    inviteService.claim(testnet, ip, token)
         .then(() => res.send({invite: token, ip}))
         .catch(e => res.send(400, e.message));
 });
