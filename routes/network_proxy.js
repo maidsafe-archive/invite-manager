@@ -41,16 +41,16 @@ router.delete('/clearAll', (req, res) => {
   }
   networkProxyService.deleteAll(req.session.testnet)
     .then(() => res.sendStatus(200))
-    .catch(err => res.send(400, err));
+    .catch(err => res.status(400).send(err));
 });
 
 router.delete('/:id', (req, res) => {
   if (!isSuperAdmin(req)) {
-  	return res.send(403, 'Not authorised');
+  	return res.status(403).send('Not authorised');
   }
   networkProxyService.delete(req.params.id)
   	.then(() => res.sendStatus(200))
-  	.catch(err => res.send(400, err));
+  	.catch(err => res.status(400).send(err));
 });
 
 const networkProxyRouter = router;

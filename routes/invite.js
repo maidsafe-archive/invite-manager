@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
     inviteService.list(req.session.testnet)
         .then(list => res.send(list))
-        .catch(err => res.send(400, err));
+        .catch(err => res.status(400).send(err));
 });
 
 router.get('/used', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/used', (req, res) => {
     }
     inviteService.listUsed(req.session.testnet)
         .then(list => res.send(list))
-        .catch(err => res.send(400, err));
+        .catch(err => res.status(400).send(err));
 });
 
 router.get('/unused', (req, res) => {
@@ -34,7 +34,7 @@ router.get('/unused', (req, res) => {
     }
     inviteService.listNotUsed(req.session.testnet)
         .then(list => res.send(list))
-        .catch(err => res.send(400, err));
+        .catch(err => res.status(400).send(err));
 });
 
 router.get('/stats', (req, res) => {
@@ -43,7 +43,7 @@ router.get('/stats', (req, res) => {
     }
     inviteService.getStats(req.session.testnet)
         .then(list => res.send(list))
-        .catch(err => res.send(400, 'Error: ' + err));
+        .catch(err => res.status(400).send('Error: ' + err));
 });
 
 router.get('/:token?', async (req, res) => {
@@ -53,7 +53,7 @@ router.get('/:token?', async (req, res) => {
             reqToken = req.session.user.invite;
         }
         if (!reqToken) {
-            return res.send(400, 'Token parameter is missing');
+            return res.status(400).send('Token parameter is missing');
         }
         const invite = await inviteService.get(req.session.testnet, reqToken);
         let role = 'user';
@@ -66,7 +66,7 @@ router.get('/:token?', async (req, res) => {
             ip: invite.ip
         });
     } catch(e) {
-        res.send(400, e);
+        res.status(400).send(e);
     }
 });
 
@@ -87,7 +87,7 @@ router.get('/:token/:testnet', async (req, res) => {
             ip: invite.ip
         });
     } catch(e) {
-        res.send(400, e);
+        res.status(400).send(e);
     }
 });
 
@@ -95,7 +95,7 @@ router.get('/:token/:testnet', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         if (!isSuperAdmin(req)) {
-            return res.send(403, 'Not authorised');
+            return res.status(403).send'Not authorised');
         }
         const list = req.body.tokens;
         for (let i = 0; i < list.length; i++) {
@@ -121,27 +121,30 @@ router.post('/resetIp/:token/:testnet?', (req, res) => {
     const ip = getClientIp(req);
     const token = req.params.token;
     // console.log(req.params.testnet || req.session.testnet, ip, token);
+    if (!(req.params.testnet || req.session.testnet)) {
+        return res.status(400).send('Invalid request. Missing Testnet parameter');
+    }
     inviteService.claim(testnet, ip, token)
         .then(() => res.send({invite: token, ip}))
-        .catch(e => res.send(400, e.message));
+        .catch(e => res.status(400).send(e));
 });
 
 router.delete('/:id', (req, res) => {
     if (!isSuperAdmin(req)) {
-        return res.send(403, 'Not authorised');
+        return res.status(403).send('Not authorised');
     }
     inviteService.delete(req.params.id)
         .then(() => res.sendStatus(200))
-        .catch(err => res.send(400, err));
+        .catch(err => res.status(400).send(err));
 });
 
 router.delete('/clearAll', (req, res) => {
     if (!isSuperAdmin(req)) {
-        return res.send(403, 'Not authorised');
+        return res.status(403).send('Not authorised');
     }
     inviteService.deleteAll(req.session.testnet)
         .then(() => res.sendStatus(200))
-        .catch(err => res.send(400, err));
+        .catch(err => res.status(400).send(err));
 });
 
 const inviteRouter = router;

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import appStateService from './app_state';
-const PROXY_NODE_LENGTH = 4;
+const PROXY_NODE_LENGTH = 8;
 const SchemaType = mongoose.Schema.Types;
 
 class NetworkProxyService {

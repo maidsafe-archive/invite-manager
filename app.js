@@ -112,7 +112,7 @@ app.use('/authUri/:testnet/:token', async (req, res) => {
     }
     res.redirect(`/update_ip.html`);
   } catch(e) {
-    res.send(400, e);
+    res.status(400).send(e);
   }
 });
 

@@ -249,7 +249,6 @@ class InviteService {
 
     claim(testnet, ip, token, user) {
         return new Promise((res, rej) => {
-            console.log('pushed');
             this.queue.push({testnet, ip, token, user, res, rej});
         });
     }
