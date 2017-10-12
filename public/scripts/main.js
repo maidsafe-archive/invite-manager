@@ -158,7 +158,7 @@ function onClickUpdateIP() {
         });
     }).catch(function (err) {
     setLoading(false);
-    alert('Error : ', err.message);
+    alert('Error : ' + err.message);
   })
 }
 
@@ -201,7 +201,7 @@ function onClickClearDb() {
     }).catch(function (err) {
     setLoading(false);
     setSuperAdminPage();
-    alert('Error : ', err.message);
+    alert('Error : ' + err.message);
   })
 }
 
@@ -378,7 +378,7 @@ function setUpdateIpPage() {
   var parsedURL = new URL(location.href);
   var toRedirect = JSON.parse(parsedURL.searchParams.get('auto_redirect'));
   var invite = parsedURL.searchParams.get('invite');
-
+  
   var displayInvitePage = function (invite, ip) {
     setLoading(false);
     displayCntr(inviteCntrClass, true);

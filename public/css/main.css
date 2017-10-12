@@ -366,6 +366,7 @@ body {
   background-repeat: no-repeat;
   outline: none;
   cursor: pointer;
+  z-index: 99;
 }
 .invite-b .has-invite .update-btn {
   margin-top: 24px;
@@ -795,4 +796,28 @@ table-view .table-view-b.proxy .head .head-i,
 
 .testnet-ls ul li:hover {
   border-color: #ddd;
+}
+
+/* mobile */
+@media only screen and (max-width: 576px) {
+  .base-vertical-center-cont {
+    display: block;
+  }
+
+  .container-card {
+    width: 100%;
+    padding: 0 16px;
+  }
+  
+  .invite-b .has-invite .label-1 {
+    line-height: inherit;
+  }
+
+  .invite-b .has-invite .ip-sec {
+    width: 90%;
+  }
+
+  .invite-b .has-invite .invite-input {
+    width: 100%;
+  }
 }
