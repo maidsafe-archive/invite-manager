@@ -178,7 +178,7 @@ app.use('/generateInvite', async (req, res) => {
                 return res.redirect(`./auth_response.html?err=No invites available`);
             }
             req.session.user.invite = invite.token;
-            res.redirect(`./update_ip.html?invite=${invite.token}`);
+            res.redirect(`./update_ip.html?invite=${invite.token}&testnet=${req.session.testnet}`);
         } else {
             user = req.session.passport.user;
             user = await userService.create(user.id, user.email, user.strategy, user.userName);
