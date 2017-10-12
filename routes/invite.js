@@ -95,7 +95,7 @@ router.get('/:token/:testnet', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         if (!isSuperAdmin(req)) {
-            return res.status(403).send'Not authorised');
+            return res.status(403).send('Not authorised');
         }
         const list = req.body.tokens;
         for (let i = 0; i < list.length; i++) {
