@@ -7,7 +7,7 @@ const appConfig = require('../configs/app');
 const router = express.Router();
 
 const isAdmin = (req) => {
-    return req && req.session && req.session.user && req.session.user.role.toLocaleString() !== 'user';
+    return req && req.session && req.session.user && req.session.user.role.toLowerCase() !== 'user';
 };
 
 router.get('/', async (req, res) => {
