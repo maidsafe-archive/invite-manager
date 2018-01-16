@@ -393,7 +393,7 @@ function setUpdateIpPage() {
     getInviteData(invite)
       .then(function(inviteData) {
         displayManageBtn(inviteData.data.role);
-        setCurrentIp(inviteData.data.ip, inviteData.data.cip + '::21');
+        setCurrentIp(inviteData.data.ip, inviteData.data.cip);
         displayInvitePage(invite, inviteData.data.ip);
         setLoading(false);
       });
