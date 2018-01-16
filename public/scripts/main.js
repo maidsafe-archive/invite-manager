@@ -88,16 +88,16 @@ function getTestnetFromQuery() {
             }
         }
     }
-    return;
+    return '';
 }
 
 function getInviteData(token) {
     let url = '/invite/' + token;
     let testnet = getTestnetFromQuery();
-    if (!testnet) {
-        alert('Testnet parameter is not found. The URL is invalid.');
-        return;
-    }
+    // if (!testnet) {
+    //     alert('Testnet parameter is not found. The URL is invalid.');
+    //     return;
+    // }
     url += ('/' + testnet);
   return get(url);
 }
@@ -105,10 +105,10 @@ function getInviteData(token) {
 function resetIP(token) {
   let url = '/invite/resetIp/' + token;
   let testnet = getTestnetFromQuery();
-  if (!testnet) {
-      alert('Testnet parameter is not found. The URL is invalid.');
-      return;
-  }
+  // if (!testnet) {
+  //     alert('Testnet parameter is not found. The URL is invalid.');
+  //     return;
+  // }
   url += ( '/' + testnet);
   return post(url, {
     withCredentials: true
@@ -393,15 +393,10 @@ function setUpdateIpPage() {
     getInviteData(invite)
       .then(function(inviteData) {
         displayManageBtn(inviteData.data.role);
-        setCurrentIp(inviteData.data.ip, inviteData.data.cip);
+        setCurrentIp(inviteData.data.ip, inviteData.data.cip + '::21');
         displayInvitePage(invite, inviteData.data.ip);
         setLoading(false);
-      })/*.catch(function (err) {
-      displayManageBtn(ROLES.ADMIN);
-      setCurrentIp('::1', '::1');
-      displayInvitePage(invite, '::1');
-      setLoading(false);
-    })*/  ;
+      });
   }
 }
 

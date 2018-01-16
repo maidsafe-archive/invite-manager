@@ -10,7 +10,7 @@ import session from 'express-session';
 // import passport from 'passport';
 import mongoose from 'mongoose';
 
-import { isSuperAdmin, getClientIp } from './utils';
+import {isSuperAdmin, getClientIp } from './utils';
 import adminRouter from './routes/admin';
 import inviteRouter from './routes/invite';
 import networkProxyRouter from './routes/network_proxy';
@@ -38,13 +38,6 @@ try {
     console.error(e);
     throw e;
 }
-
-const loggedIn = (req, res, next) => {
-    if (!req.session || !req.session.passport || !req.session.passport.user) {
-        return res.status(401).send('Unauthorised');
-    }
-    next();
-};
 
 const app = express();
 const debug = Debug('invites-manager:app');
@@ -107,23 +100,23 @@ app.use('/profile', (req, res) => {
     }
 });
 
-app.use('/authUri/:testnet/:token', loggedIn, async (req, res) => {
-    if (!req.params.testnet || !req.params.token) {
-        return res.send(400, 'Invalid URI');
+app.use('/authUri/:testnet/:token', async (req, res) => {
+  if (!req.params.testnet || !req.params.token) {
+    return res.send(400, 'Invalid URI');
+  }
+  try {
+    const invite = await inviteService.get(req.params.testnet, req.params.token);
+    const ip = getClientIp(req);
+    if (!invite.ip) {
+      await inviteService.claim(req.params.testnet, ip, invite.token);
     }
-    try {
-        const invite = await inviteService.get(req.params.testnet, req.params.token);
-        const ip = getClientIp(req);
-        if (!invite.ip) {
-            await inviteService.claim(req.params.testnet, ip, invite.token);
-        }
-        res.redirect(`/update_ip.html`);
-    } catch (e) {
-        res.send(400, e);
-    }
+    res.redirect(`/update_ip.html`);
+  } catch(e) {
+    res.send(400, e);
+  }
 });
 
-app.use('/clearDatabase', loggedIn, async (req, res) => {
+app.use('/clearDatabase', async (req, res) => {
     try {
         await inviteService.deleteAll(req.session.testnet);
         await userService.deleteAll(req.session.testnet);
@@ -134,7 +127,7 @@ app.use('/clearDatabase', loggedIn, async (req, res) => {
     }
 });
 
-app.use('/assignInvite/:id', loggedIn, async (req, res) => {
+app.use('/assignInvite/:id', async (req, res) => {
     try {
         let user = req.session.passport.user;
         if (!isSuperAdmin(req) && !await adminService.isAdmin(user.userName)) {
@@ -153,7 +146,7 @@ app.use('/assignInvite/:id', loggedIn, async (req, res) => {
     }
 });
 
-app.use('/testnet/:name', loggedIn, (req, res) => {
+app.use('/testnet/:name', (req, res) => {
     if (appConfig.testnets.indexOf(req.params.name) === -1) {
         return res.status(400).send('Invalid testnet');
     }
@@ -161,11 +154,11 @@ app.use('/testnet/:name', loggedIn, (req, res) => {
     res.redirect('/generateInvite');
 });
 
-app.use('/testnet', loggedIn, (req, res) => {
+app.use('/testnet', (req, res) => {
     res.send(appConfig.testnets);
 });
 
-app.use('/generateInvite', loggedIn, async (req, res) => {
+app.use('/generateInvite', async (req, res) => {
     try {
         let user = req.session.passport.user;
         const isSuperAdmin = appConfig.superAdmins.indexOf(user.email) > -1;
