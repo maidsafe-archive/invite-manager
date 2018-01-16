@@ -812,3 +812,33 @@ body {
 .testnet-ls ul li:hover {
   border-color: #ddd;
 }
+
+@media only screen and (max-width: 576px) {
+  .base-vertical-center-cont {
+    display: block;
+  }
+
+  .container-card {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .invite-b .has-invite .label-1 {
+    line-height: inherit;
+  }
+
+  .invite-b .has-invite .ip-sec {
+    width: 90%;
+  }
+
+  .invite-b .has-invite .invite-input {
+    width: 100%;
+  }
+  .invite-b .has-invite .ip-sec .ip-sec-i {
+    width: 100%;
+    margin: 8px 0;
+  }
+  .invite-b .has-invite .label-1.warn {
+    margin-top: 20px;
+  }
+}
