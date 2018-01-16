@@ -16,6 +16,11 @@ var ROLES = {
   USER: 'user'
 };
 
+var ERROR_CODES = {
+  UNAUTHORISED: 401,
+  FORBIDDEN: 403
+};
+
 function setLoading(state) {
   if (state) {
     loadingEle.addClass('show');
@@ -34,7 +39,7 @@ function fetchTestnetSelection() {
 
 function handleError(err) {
   alert(`Error :: ${err.response.statusText || err.message}`);
-  if (err.response.status === 401) {
+  if ([ERROR_CODES.UNAUTHORISED, ERROR_CODES.FORBIDDEN].indexOf(err.response.status) !== -1) {
     return goTo('/');
   }
   setLoading(false);
