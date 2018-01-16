@@ -16,6 +16,14 @@ var ROLES = {
   USER: 'user'
 };
 
+function setLoading(state) {
+  if (state) {
+    loadingEle.addClass('show');
+    return;
+  }
+  loadingEle.removeClass('show');
+}
+
 function storeTestnetSelection(val) {
   window.localStorage.setItem(TESTNET_SELECTION, val);
 }
@@ -24,8 +32,24 @@ function fetchTestnetSelection() {
   return window.localStorage.getItem(TESTNET_SELECTION);
 }
 
+function handleError(err) {
+  alert(`Error :: ${err.response.statusText || err.message}`);
+  if (err.response.status === 401) {
+    return goTo('/');
+  }
+  setLoading(false);
+}
+
 function post(url, data, headers) {
-  return axios.post(BASE_URL + url, data, headers ? headers : {});
+  return axios.post(BASE_URL + url, data, headers ? headers : {}).catch(handleError);
+}
+
+function get(url) {
+  return axios.get(BASE_URL + url).catch(handleError);
+}
+
+function deleteReq(url) {
+  return axios.delete(BASE_URL + url).catch(handleError);
 }
 
 function setTestnetTitle() {
@@ -36,25 +60,12 @@ function setTestnetTitle() {
   $('#testnetTitle').html(title.replace('-', ' ').toUpperCase());
 }
 
-function get(url) {
-  return axios.get(BASE_URL + url);
-}
-
-function deleteReq(url) {
-  return axios.delete(BASE_URL + url);
-}
-
 function goTo(page, toNewPage) {
   var path = location.pathname.split('/').slice(0, -1).join('/');
   if (toNewPage) {
     return window.open(path + page);
   }
   location.assign(path + page);
-}
-
-function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
 }
 
 function displayCntr(className, state) {
@@ -64,14 +75,6 @@ function displayCntr(className, state) {
     return;
   }
   $(ele).show();
-}
-
-function setLoading(state) {
-  if (state) {
-    loadingEle.addClass('show');
-    return;
-  }
-  loadingEle.removeClass('show');
 }
 
 function getTestnetFromQuery() {
@@ -350,7 +353,7 @@ function setCurrentIp(ip, cip) {
   $('#currentInviteIP').html(cip || 'not set');
   var updateIpBtn = $('#updateIp');
   if (!ip) {
-    updateIpBtn.html('Set IP')
+    updateIpBtn.html('Set Registered IP')
   }
   updateIpBtn.prop('disabled', (ip === cip));
 }
@@ -599,7 +602,7 @@ function setChooser() {
       console.log('res', res.data)
       setTestnetList(res.data);
       setLoading(false);
-    })
+    });
 }
 
 $(function () {
