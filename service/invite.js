@@ -98,6 +98,10 @@ class InviteService {
                         proxyConfig.host = proxyIp;
                         proxyConfig.password = proxyCred.scpPassword;
                         console.log('SCP to', proxyIp);
+                        if (process.env.NODE_ENV === 'dev') {
+                            console.log('IN DEV MODE - SCP completed', proxyIp);
+                            return res();
+                        }
                         scpClient.scp(localFileName, proxyConfig, (err) => {
                             console.log('SCP completed', proxyIp);
                             err ? rej(err) : res();
