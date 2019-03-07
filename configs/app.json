@@ -5,7 +5,7 @@
 	"mongo": "mongodb://localhost/invites_manager",
 	"authConfirmURL": "/chooser.html",
 	"superAdmins": ["krishna.kumar@maidsafe.net", "viv.rajkumar@maidsafe.net", "stephen.coyle@maidsafe.net"],
-	"testnets": ["TEST-18"],
+	"testnets": ["Alpha-2"],
 	"authReturnUrl": {
 		"dev": "http://localhost:8000/auth/discourse/callback",
 		"prod": "https://invite.maidsafe.net/auth/discourse/callback"
