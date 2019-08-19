@@ -6,5 +6,6 @@ export const isSuperAdmin = (req) => {
 };
 
 export const getClientIp = (req) => {
-	return req.ip.replace('::ffff:', '');
+	const ip = (req.headers["x-forwarded-for"] || req.connection.remoteAddress || "").split(",")[0].trim();
+	return ip.replace("::ffff:", "");
 };
