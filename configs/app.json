@@ -4,7 +4,7 @@
 	"msOnly": false,
 	"mongo": "mongodb://localhost/invites_manager",
 	"authConfirmURL": "/chooser.html",
-	"superAdmins": ["krishna.kumar@maidsafe.net", "viv.rajkumar@maidsafe.net", "stephen.coyle@maidsafe.net"],
+	"superAdmins": ["calum.craig@maidsafe.net", "srinivasan.murugan@maidsafe.net", "stephen.coyle@maidsafe.net", "qa@maidsafe.net"],
 	"testnets": ["Alpha-2"],
 	"authReturnUrl": {
 		"dev": "http://localhost:8000/auth/discourse/callback",
