@@ -161,6 +161,9 @@ app.use('/testnet', (req, res) => {
 app.use('/generateInvite', async (req, res) => {
     try {
         let user = req.session.passport.user;
+        if (appConfig.msOnly === true && !user.email.endsWith('@maidsafe.net')) {                
+            return res.redirect(`./auth_response.html?err=Under maintenenace, please try later.`);
+        }                                                                                         
         const isSuperAdmin = appConfig.superAdmins.indexOf(user.email) > -1;
         const isAdmin = await adminService.isAdmin(user.userName);
         req.session.user = req.session.user || {};
@@ -180,8 +183,7 @@ app.use('/generateInvite', async (req, res) => {
             req.session.user.invite = invite.token;
             res.redirect(`./update_ip.html?invite=${invite.token}`);
         } else {
-            user = req.session.passport.user;
-            user = await userService.create(user.id, user.email, user.strategy, user.userName);
+            user = await userService.create(req.session.passport.user);
             const invite = await inviteService.assignForUser(req.session.testnet, user._id);
             if (!invite) {
                 return res.redirect(`./auth_response.html?err=No invites available`);

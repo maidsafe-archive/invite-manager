@@ -8,7 +8,7 @@ class UserService {
 		this.User = mongoose.model('user', { 
 			id: SchemaType.String,
 			userName: SchemaType.String,
-			email: SchemaType.String,
+			// email: SchemaType.String,
 			strategy: SchemaType.String,
 			createdOn: SchemaType.Date,
 			lastLogIn: SchemaType.Date
@@ -31,11 +31,12 @@ class UserService {
 		});
 	}
 
-	create(id, email, strategy, userName) {
+	create(user) {
 		return new Promise((res, rej) => {
-			const user = new this.User({id, email, strategy, userName, createdOn: new Date, lastLogIn: new Date});
-			user.save((err, user) => {
-				err ? rej(err) : res(user);
+			const {id, userName, strategy } = user;
+			const userModel = new this.User({id, strategy, userName, createdOn: new Date, lastLogIn: new Date});
+			userModel.save((err, userObj) => {
+				err ? rej(err) : res(userObj);
 			});
 		});
 	}
